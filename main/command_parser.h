@@ -9,6 +9,8 @@
 #define FAST_BUFFER_LEN   16
 
 #define FAST_RESPONSE     "K\n"
+#define COMMAND_RECEIVED  "COMMAND_RECEIVED\n"
+#define COMMAND_INVALID   "COMMAND_INVALID\n"
 
 typedef struct {
   

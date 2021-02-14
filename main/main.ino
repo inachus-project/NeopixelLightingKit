@@ -1,8 +1,6 @@
 // Neopixel lighting something
 
 #define test_length 30
-#define COMMAND_RECEIVED  "COMMAND_RECEIVED\n"
-#define COMMAND_INVALID   "COMMAND_INVALID\n"
 #define READY_RESPONSE    "READY\n"
 #define DEBUGGING         false
 

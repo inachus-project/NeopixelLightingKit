@@ -224,7 +224,7 @@ static void fast_mode(void){
   char fast_buffer[FAST_BUFFER_LEN];
   memset(fast_buffer, 0, FAST_BUFFER_LEN);
 
-  Serial.write(FAST_RESPONSE);
+  Serial.write(COMMAND_RECEIVED);
 
   while(strcmp(fast_buffer, "EXIT\n") != 0){
     
@@ -233,7 +233,7 @@ static void fast_mode(void){
     if(strcmp(fast_buffer, "U\n") == 0){
       
       lk_update_pixels();
-      Serial.write(FAST_RESPONSE);
+      // Serial.write(FAST_RESPONSE);
       
     }
     else if(strcmp(fast_buffer, "EXIT\n") == 0) continue;
@@ -257,7 +257,7 @@ static void fast_mode(void){
       // Validate
       if(fast_buffer[raw_command_index] == '\n'){
         
-        Serial.write(FAST_RESPONSE);
+        // Serial.write(FAST_RESPONSE);
         continue;
         
       }
@@ -280,7 +280,7 @@ static void fast_mode(void){
       uint32_t rgb = strtol(temp_buffer, temp_return, 16);
 
       set_one_neopixel(index, rgb);
-      Serial.write(FAST_RESPONSE);
+      // Serial.write(FAST_RESPONSE);
       
     }
     
