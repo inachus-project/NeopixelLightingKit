@@ -14,6 +14,7 @@ void setup() {
 
   // Start serial port
   Serial.begin(115200);
+  while(!Serial);
   Serial.write(READY_RESPONSE);
 
   current_command = cp_buffer_init();

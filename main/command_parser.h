@@ -5,7 +5,7 @@
 #define MAX_PARAMS        4
 #define PARAM_LEN         16
 #define COMMAND_TYPE_LEN  PARAM_LEN
-#define TEMP_BUF_SIZE[PARAM_LEN + COMMAND_TYPE_LEN]
+#define TEMP_BUF_SIZE     PARAM_LEN + COMMAND_TYPE_LEN 
 #define FAST_BUFFER_LEN   16
 
 #define FAST_RESPONSE     "K\n"

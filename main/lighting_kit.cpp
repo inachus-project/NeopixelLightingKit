@@ -1,14 +1,16 @@
-#include <XLR8NeoPixel.h>
+#include <OctoWS2811.h>
+// #include <XLR8NeoPixel.h>
 #include "lighting_kit.h"
 
-#define NEOPIXEL_PIN 6
+#define NEOPIXEL_PIN 2
 #define MAX_NUM_NEOPIXELS 30
 
 // Strip length specified by user
 uint16_t current_length = MAX_NUM_NEOPIXELS;
+DMAMEM int octo_buffer[MAX_NUM_NEOPIXELS * 6];
 
 // Neopixel object
-XLR8NeoPixel strip = XLR8NeoPixel(current_length, NEOPIXEL_PIN, NEO_GRB + NEO_KHZ800);
+OctoWS2811 strip(current_length, octo_buffer, NULL, WS2811_GRB | WS2811_800kHz);
 
 // buffer for neopixel colors
 uint32_t strip_buffer[MAX_NUM_NEOPIXELS] = {};
@@ -17,6 +19,7 @@ void lk_init(uint16_t strip_length, uint32_t starting_color){
 
   // Start neopixels
   strip.begin();
+  strip.show();
 
   // Validate length
   if(strip_length > MAX_NUM_NEOPIXELS) return;
@@ -47,7 +50,7 @@ void lk_set_pixels_to_buffer(void){
   // Initilize pixel color
   for(uint16_t count = 0; count < current_length; count++){
 
-    strip.setPixelColor(count, strip_buffer[count]);
+    strip.setPixel(count, strip_buffer[count]);
       
   }
     
@@ -79,6 +82,7 @@ void lk_set_pixel_color(uint16_t pixel, uint32_t color){
 void lk_update_pixels(void){
 
   lk_set_pixels_to_buffer();
+  while(strip.busy());
   strip.show();
   
 }
