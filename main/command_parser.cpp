@@ -236,6 +236,49 @@ static void fast_mode(void){
       // Serial.write(FAST_RESPONSE);
       
     }
+    else if(fast_buffer[0] == 'T'){
+      
+      char temp_buffer[FAST_BUFFER_LEN];
+      char ** temp_return;
+      uint16_t temp_index = 0;
+      uint16_t raw_command_index = 0;
+      memset(temp_buffer, 0, FAST_BUFFER_LEN);
+
+      // Get command type
+      while(fast_buffer[raw_command_index] != ':' && fast_buffer[raw_command_index] != '\n'){
+    
+        temp_index++;
+        raw_command_index++;
+        
+      }
+
+      // Validate
+      if(fast_buffer[raw_command_index] == '\n'){
+        
+        // Serial.write(FAST_RESPONSE);
+        continue;
+        
+      }
+      raw_command_index++;
+
+      memset(temp_buffer, 0, FAST_BUFFER_LEN);
+      temp_index = 0;
+      
+      // Get command type
+      while(fast_buffer[raw_command_index] != ':' && fast_buffer[raw_command_index] != '\n'){
+    
+        temp_buffer[temp_index] = fast_buffer[raw_command_index];
+        temp_index++;
+        raw_command_index++;
+        
+      }
+
+      uint32_t time_delay = strtol(temp_buffer, temp_return, 16);
+
+      delay_millis(time_delay);
+      // Serial.write(FAST_RESPONSE);
+      
+    }
     else if(strcmp(fast_buffer, "EXIT\n") == 0) continue;
     else{
       
